@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles
+{% endblock %}
+
+{% block body %}
+	<header>
+		<p>Envie de partager avec les villageois ?</p>
+		<a class="button" href="{{ path('create_content') }}">Créez votre contenu ici</a>
+	</header>
+	<section class="articles">
+		{% for article in articles %}
+
+			<article>
+				<h2>{{ article.title }}</h2>
+				<div class="metadata">Le
+					{{ article.createdAt | date('d/m/Y') }}
+					à
+					{{ article.createdAt | date('H:i') }}</div>
+				<div class="content">
+					<img src="{{ article.image }}" alt="">
+					<div class="articleContent">
+						{{ article.content | raw }}
+					</div>
+					<a href="{{ path('show', {'id': article.id }) }}" class="btn btn-primary">Suite</a>
+				</div>
+			</article>
+
+		{% endfor %}
+	</section>
+{% endblock %}
